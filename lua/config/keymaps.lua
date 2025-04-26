@@ -4,6 +4,26 @@ vim.keymap.set("n", "<leader>lyc", function()
   require("oil").open_float("/mnt/c/Users/steph/OneDrive - Région Île-de-France")
 end, { desc = "go to Onedrive" })
 
+vim.keymap.set("n", "<leader>pr", function()
+  require("oil").open_float("/home/steph/Sync/premieres")
+end, {desc = "go to premieres website"})
+
+
+vim.keymap.set("n", "<leader>sec", function()
+  require("oil").open_float("/home/steph/Sync/secondes")
+end, {desc = "go to secondes website"})
+
+
+vim.keymap.set("n", "<leader>ter", function()
+  require("oil").open_float("/home/steph/Sync/terminales")
+end, {desc = "go to terminales website"})
+
+-- Keymap to toggle transparency in Kanagawa theme
+vim.keymap.set('n', '<leader>tt', function() 
+    -- Call the global toggle_transparency function defined in kanagawa.lua
+    vim.cmd('lua toggle_transparency()')
+end, { desc = 'Toggle transparency' })
+
 
 -- Save file without auto-formatting
 vim.keymap.set('n', '<leader>sn', '<cmd>noautocmd w <CR>', opts)
