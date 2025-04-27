@@ -1,5 +1,10 @@
 -- Open Parent directory in Oil
 vim.keymap.set("n", "-", "<cmd>Oil --float<CR>", opts)
+
+vim.keymap.set("n", "<leader>format", function()
+  require("conform").format()
+end,  {desc = "fmt"})
+
 vim.keymap.set("n", "<leader>lyc", function()
   require("oil").open_float("/mnt/c/Users/steph/OneDrive - Région Île-de-France")
 end, { desc = "go to Onedrive" })
@@ -18,6 +23,9 @@ vim.keymap.set("n", "<leader>ter", function()
   require("oil").open_float("/home/steph/Sync/terminales")
 end, {desc = "go to terminales website"})
 
+vim.keymap.set("n", "<leader>cfg", function()
+  require("oil").open_float("/home/steph/.config/nvim/")
+end, {desc = "go to ~/.config/nvim/ "})
 -- Keymap to toggle transparency in Kanagawa theme
 vim.keymap.set('n', '<leader>tt', function() 
     -- Call the global toggle_transparency function defined in kanagawa.lua
