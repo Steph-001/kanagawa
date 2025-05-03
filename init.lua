@@ -32,5 +32,18 @@ require("lspconfig").pyright.setup({
 })
 
 require("lspconfig").lua_ls.setup({
-	filetypes = { "lua" }, -- Only attach to Lua files
+	settings = {
+		Lua = {
+			diagnostics = {
+				globals = { "vim" }, -- Recognize 'vim' as a global
+			},
+			workspace = {
+				library = vim.api.nvim_get_runtime_file("", true), -- Make server aware of Neovim runtime files
+				checkThirdParty = false,
+			},
+			telemetry = {
+				enable = false,
+			},
+		},
+	},
 })
