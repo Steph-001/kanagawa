@@ -1,29 +1,28 @@
+-- In lua/plugins/conform.lua
 return {
-    "stevearc/conform.nvim",
-    opts = {
-        formatters_by_ft = {
-            -- Current formatters
-            lua = { "stylua" },
-            python = { "isort", "black" },
-            javascript = { "prettierd", "prettier", stop_after_first = true },
-            sh = { "shfmt" },
-            bash = { "shfmt" },
-            
-            -- Additional formatters
-            go = { "gofmt" },
-            html = { "prettier" },
-            markdown = { "prettier" },
-            css = { "prettier" },
-            scss = { "prettier" },
-            yaml = { "prettier" },
-            json = { "prettier" },
-            toml = { "taplo" },
-            -- For TypeScript if you use it
-            typescript = { "prettierd", "prettier", stop_after_first = true },
-        },
-        format_on_save = {
-            timeout_ms = 500,
-            lsp_fallback = true,
-        },
-    },
+	"stevearc/conform.nvim",
+	event = { "BufWritePre" },
+	cmd = { "ConformInfo" },
+	config = function()
+		require("conform").setup({
+			formatters_by_ft = {
+				c = { "clang-format" },
+				-- other formatters...
+			},
+			-- Add this configuration for clang-format
+			formatters = {
+				clang_format = {
+					prepend_args = { "--style={BreakBeforeBraces: Allman}" },
+				},
+			},
+		})
+
+		-- Format on save
+		vim.api.nvim_create_autocmd("BufWritePre", {
+			pattern = "*",
+			callback = function(args)
+				require("conform").format({ bufnr = args.buf })
+			end,
+		})
+	end,
 }

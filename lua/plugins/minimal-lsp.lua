@@ -18,6 +18,7 @@ return {
 					"bashls", -- Bash
 					"html", -- HTML
 					"cssls", -- CSS
+					"clangd", --C
 				},
 			})
 		end,

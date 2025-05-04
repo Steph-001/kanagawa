@@ -1,0 +1,15 @@
+# .clang-format
+---
+Language: Cpp
+# Use Allman style braces - each brace gets its own line
+BreakBeforeBraces: Allman
+# Maintain block indentation
+IndentWidth: 4
+# Don't combine short blocks onto a single line 
+AllowShortBlocksOnASingleLine: false
+AllowShortFunctionsOnASingleLine: None
+AllowShortIfStatementsOnASingleLine: false
+AllowShortLoopsOnASingleLine: false
+# Other useful settings
+ColumnLimit: 100
+---
