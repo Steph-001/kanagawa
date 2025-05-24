@@ -91,5 +91,6 @@ return {
             end,
             desc = "[/] Live grep the current buffer",
         },
+
     }
 }
