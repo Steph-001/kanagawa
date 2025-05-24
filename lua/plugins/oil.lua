@@ -1,11 +1,19 @@
-return { 
-  'stevearc/oil.nvim',
-  ---@module 'oil'
-  ---@type oil.SetupOpts
-  opts = {},
-  -- Optional dependencies
-  dependencies = { { "echasnovski/mini.icons", opts = {} } },
-  -- dependencies = { "nvim-tree/nvim-web-devicons" }, -- use if you prefer nvim-web-devicons
-  -- Lazy loading is not recommended because it is very tricky to make it work correctly in all situations.
+return {
+  "stevearc/oil.nvim",
   lazy = false,
+  dependencies = { "nvim-tree/nvim-web-devicons" },
+  config = function()
+    require("oil").setup({
+      view_options = {
+        show_hidden = false,
+      },
+      keymaps = {
+        ["<.>"] = "actions.toggle_hidden",
+        ["<CR>"] = "actions.select",
+        ["-"] = "actions.parent",
+        ["q"] = "actions.close",
+      },
+    })
+  end,
 }
+
