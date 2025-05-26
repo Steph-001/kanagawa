@@ -20,6 +20,10 @@ vim.keymap.set("n", "<leader>lyc", function()
 	require("oil").open_float("/mnt/c/Users/steph/OneDrive - Région Île-de-France")
 end, { desc = "Go to Onedrive" })
 
+vim.keymap.set("n", "<leader>nts", function()
+	require("oil").open_float("/mnt/c/Users/steph/OneDrive - Région Île-de-France/notes")
+end, { desc = "Go to Onedrive" })
+
 vim.keymap.set("n", "<leader>pr", function()
 	require("oil").open_float("/home/steph/Sync/premieres")
 end, { desc = "Go to premieres website" })
@@ -86,4 +90,9 @@ vim.keymap.set("i", "fd", "<Esc>")
 
 -- LSP diagnostics
 vim.keymap.set("n", "<leader>e", vim.diagnostic.open_float, { noremap = true, silent = true })
+
+-- search by tags
+vim.keymap.set('n', '<leader>ft', function()
+  search_by_tags()
+end, { desc = 'Find notes by YAML tags (fzf)' })
 

@@ -61,22 +61,36 @@ require("lspconfig").pyright.setup({
 })
 
 -- Markdown file template
-vim.api.nvim_create_autocmd("BufNewFile", {
+vim.api.nvim_create_autocmd({ "BufNewFile", "BufReadPost" }, {
   pattern = "*.md",
   callback = function()
-    local title = vim.fn.expand("%:t:r")  -- filename without extension
-    local date = os.date("%Y-%m-%d")
-    local lines = {
-      "---",
-      'title: "' .. title:gsub("-", " ") .. '"',
-      "date: " .. date,
-      "tags: []",
-      "---",
-      "",
-      "# " .. title:gsub("-", " "),
-      ""
-    }
-    vim.api.nvim_buf_set_lines(0, 0, 0, false, lines)
+    local buf = vim.api.nvim_get_current_buf()
+
+    if vim.bo[buf].buftype ~= "" then return end
+
+    if vim.api.nvim_buf_line_count(buf) == 1 and vim.api.nvim_buf_get_lines(buf, 0, 1, false)[1] == "" then
+      local title = vim.fn.expand("%:t:r")
+      local date = os.date("%Y-%m-%d")
+      local lines = {
+        "---",
+        'title: "' .. title:gsub("-", " ") .. '"',
+        "date: " .. date,
+        "tags: []",
+        "---",
+        "",
+        "# " .. title:gsub("-", " "),
+        ""
+      }
+
+      vim.api.nvim_buf_set_lines(buf, 0, 0, false, lines)
+
+      -- Move cursor inside the brackets on the tags line (line 5, column 8)
+      pcall(vim.api.nvim_win_set_cursor, 0, {4, 8})
+
+      if vim.api.nvim_get_current_win() == vim.fn.win_getid() then
+        vim.cmd("startinsert")
+      end
+    end
   end,
 })
 
